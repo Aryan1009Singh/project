@@ -1,0 +1,74 @@
+.dog {
+    width: 100%;
+    height: 80px;
+    background-color: #F79B26;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;    
+}
+
+.topleft, .topright{
+    flex:2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.topcc{
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.top1{
+    font-size: 40px;
+    margin-right: 200px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border: 10px;
+    border-color: black;
+}
+
+.top2, .top3{
+    font-size: 40px;
+    cursor: pointer;
+    margin-left: 40px;
+    margin-right: 20px;
+}
+.top4{
+    font-size:28px;
+    
+    cursor: pointer;
+    align-items: center;
+    flex: auto;
+    top: 70px;
+    color: aliceblue;
+}
+.topcenter{
+    border: 1px salmon;
+    width: 400px;
+    height: 38px;
+    left: 275px;
+    top: 20px;
+    flex: 3;
+    background: #0c0b0b;
+
+}
+
+.topl{
+    left:30px;
+}
+
+.inp{
+    width: 600px;
+    height: 35px;
+    left: 375px;
+    top: 27px;
+    font-size: large;
+    border: none;
+    
+}
+
