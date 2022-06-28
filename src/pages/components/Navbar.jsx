@@ -1,29 +1,31 @@
 import styled from 'styled-components'
-
+import './navbar.css'
 const Container = styled.div`
     height: 65px;;
     background-color: #80e1ca;
+    gap: 100px;
     
 `
 
 const Wrapper = styled.div`
     padding : 10px 20px;
     display: flex;
+    gap: 200px;
     justify-content: space-between;
     
 `
-const Left = styled.div`
-    flex:1;
+const Left = styled.i`
+    
     font-size: 50px;
     display: flex;
     cursor: pointer;
-    margin-left: 70px;
+    
     
 `
 const Center = styled.div`
-    flex:2;
+   
     display: flex;
-    gap: 20px;
+    gap: 80px;
 
 `
 const Input =styled.input`
@@ -34,12 +36,17 @@ const Input =styled.input`
     background-color: #80e1ca ;
 `
 
-const Right = styled.div`
-    flex: 1;
+const Right = styled.div`    
     display: flex;
     font-size: 50px;
     cursor: pointer;
-    gap: 100px;
+    gap: 20px;
+`
+const Rright = styled.div`
+    display: flex;
+    font-size: 50px ;
+    cursor: pointer;
+    
 `
 const SearchContainer= styled.div`
     width: 400px;
@@ -53,12 +60,14 @@ const SearchContainer= styled.div`
 const But= styled.button`
     width: 150px;
     border-radius: 10px;
-    background-color: #ce9ac5e4;
+    background-color: #564553e3;
     font-size: larger;
     font-family: 'Poppins';
     font-style: normal;
-    font-weight: 600;
+    color: white;
+    font-weight: 1000;
     cursor: pointer;
+    gap: 10px;
     
 `
 
@@ -73,14 +82,19 @@ export default function Navbar() {
                 <Center>
                     <SearchContainer>                        
                         <Input />
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i className="top fa-solid fa-magnifying-glass"></i>
                     </SearchContainer>
-                    <But>Categories</But>
+                    <But>Categories  <i class="fa-solid fa-angle-down"></i>
+                       
+                    </But>
                 </Center>
                 <Right>
                     <i class="fa-brands fa-sellcast"></i>
-                    <i class="fa-solid fa-user"></i>
+                    
                 </Right>
+                <Rright>
+                    <i class="fa-solid fa-user"></i>
+                </Rright>
             </Wrapper>
         </Container>
     )

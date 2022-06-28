@@ -1,7 +1,8 @@
 .work{
     height: 200px;
     width: 200px;
-    left: auto;
-    align-items: right;
-    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+
 }

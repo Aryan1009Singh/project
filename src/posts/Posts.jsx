@@ -10,13 +10,22 @@ const Container = styled.div`
     flex-wrap: wrap;
        
 `
+
+const Heading= styled.p`
+    text-align: center;
+    font-size: 50px;
+    
+`
 const Posts = () => {
   return (
+    <>
+    <Heading>Fresh Recomendations</Heading>
     <Container>
         {popular.map(item =>(
             <Post item={item} key={item.id}/> 
         ))}
     </Container>
+    </>
   )
 }
 

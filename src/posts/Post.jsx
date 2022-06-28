@@ -8,6 +8,7 @@ const Container= styled.div`
     height: 280px;
     border: 3px solid black;
     border-radius: 20px;
+    cursor: pointer;
     
 ` 
 
@@ -15,10 +16,12 @@ const Info=styled.div`
     align-items: right;
     justify-content: center;
     font-weight:500;
+    text-align: center;
 `
 const Price= styled.div`
     align-items: center;
     justify-content: center;
+    text-align: center;
 `
 
 const Post = ({item}) => {
