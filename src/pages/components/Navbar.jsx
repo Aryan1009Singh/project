@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 `
 const Left = styled.div`
     flex:1;
-    font-size: xx-large;
+    font-size: 50px;
     display: flex;
     cursor: pointer;
     margin-left: 70px;
@@ -37,7 +37,7 @@ const Input =styled.input`
 const Right = styled.div`
     flex: 1;
     display: flex;
-    font-size: xx-large;
+    font-size: 50px;
     cursor: pointer;
     gap: 100px;
 `
@@ -58,6 +58,7 @@ const But= styled.button`
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
+    cursor: pointer;
     
 `
 
