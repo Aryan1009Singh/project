@@ -1,14 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
+import './post.css'
 const Container= styled.div`   
     flex:1;
-    size: 100px;
+    margin: 10px;
+    min-width: 280px;
+    height: 280px;
+    border: 3px solid black;
+    border-radius: 20px;
 ` 
-const Image=styled.image`
-    width: 50;
-    height: 50;
-    z-index: 2;
-`
+
 const Info=styled.div`
     align-items: center;
     justify-content: center;
@@ -21,14 +22,14 @@ const Price= styled.div`
 const Post = ({item}) => {
   return (
     <Container>
-        <Image src={item.imgUrl}>
+        <img src={item.img} className='work' alt='' />
             <Info>
                 {item.name}
             </Info>
             <Price>
-                Price is Rupee {item.price}
+                Price in Rupee {item.price}
             </Price>
-        </Image>
+        
 
     </Container>
   )

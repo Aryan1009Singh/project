@@ -13,7 +13,7 @@ const Posts = () => {
   return (
     <Container>
         {popular.map(item =>(
-            <Post item={item} key={item.id}/>
+            <Post item={item} key={item.id}/> 
         ))}
     </Container>
   )
