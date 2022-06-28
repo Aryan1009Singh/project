@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import './navbar.css'
 const Container = styled.div`
+    width: 100vw;
     height: 65px;;
     background-color: #80e1ca;
     gap: 100px;
