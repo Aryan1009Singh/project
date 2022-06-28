@@ -7,6 +7,7 @@ const Container = styled.div`
     padding: 20px;
     display: flex;
     flex:1;
+    flex-wrap: wrap;
        
 `
 const Posts = () => {

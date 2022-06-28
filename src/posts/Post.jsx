@@ -2,17 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import './post.css'
 const Container= styled.div`   
-    flex:1;
+    padding: 20px;
     margin: 10px;
-    min-width: 280px;
+    min-width: 300px;
     height: 280px;
     border: 3px solid black;
     border-radius: 20px;
+    
 ` 
 
 const Info=styled.div`
-    align-items: center;
+    align-items: right;
     justify-content: center;
+    font-weight:500;
 `
 const Price= styled.div`
     align-items: center;
@@ -22,7 +24,7 @@ const Price= styled.div`
 const Post = ({item}) => {
   return (
     <Container>
-        <img src={item.img} className='work' alt='' />
+        <img src={item.imgUrl} className='work' alt='' />
             <Info>
                 {item.name}
             </Info>
