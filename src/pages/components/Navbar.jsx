@@ -58,18 +58,23 @@ const SearchContainer= styled.div`
     padding: 5px;  
     
 `
-const But= styled.button`
+const But= styled.select`
     width: 150px;
     border-radius: 10px;
-    background-color: #564553e3;
+    background-color: aqua;
     font-size: larger;
     font-family: 'Poppins';
     font-style: normal;
-    color: white;
+    color: black;
     font-weight: 1000;
     cursor: pointer;
     gap: 10px;
     
+`
+const Options =styled.option`
+    background-color: green;
+    color: white;
+    font-weight: bold;
 `
 
 
@@ -85,8 +90,17 @@ export default function Navbar() {
                         <Input />
                         <i className="top fa-solid fa-magnifying-glass"></i>
                     </SearchContainer>
-                    <But>Categories  <i class="fa-solid fa-angle-down"></i>
-                       
+                    <But>
+                        <Options disabled selected>
+                            Categories
+                        </Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
                     </But>
                 </Center>
                 <Right>
