@@ -42,8 +42,7 @@ const Input = styled.input`
 const Button = styled.button`
     width: 50%;
     border: none;
-    padding: 15px 20px;
-    
+    padding: 15px 20px;    
     justify-content: center;
     background-color: teal;
     color:white;
