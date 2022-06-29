@@ -32,9 +32,7 @@ export default function Home() {
             <Center>
               <Bu>Load More</Bu>
             </Center>
-            <br></br>
-            <br></br>
-            <br></br>
+            
             <Footer />
             
 

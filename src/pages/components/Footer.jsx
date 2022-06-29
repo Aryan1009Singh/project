@@ -22,7 +22,7 @@ const Footer = () => {
                     <span style={{ paddingRight: 5 }}>Copyright </span>
                     <FontAwesomeIcon icon={faCopyright} />{" "}
                     <span style={{ paddingLeft: 5 }}>
-                        {new Date().getFullYear()} YourCompany. All Rights
+                        {new Date().getFullYear()} IITG OLX. All Rights
                         Reserved.
                     </span>
                 </div>

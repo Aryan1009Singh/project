@@ -69,12 +69,25 @@ const But= styled.select`
     font-weight: 1000;
     cursor: pointer;
     gap: 10px;
+    padding: 10px;
+    margin-right: 10px;
+    &:hover,
+    &:focus{
+        color: black;
+        transition:0.4s;
+    }
     
 `
 const Options =styled.option`
     background-color: green;
     color: white;
     font-weight: bold;
+    &:hover,
+    &:focus{
+        color: black;
+        transition:0.4s;
+    }
+    
 `
 
 
