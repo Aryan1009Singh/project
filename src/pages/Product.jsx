@@ -13,8 +13,8 @@ const Container=styled.div`
 `
 const Wrapper1=styled.div`
     display: flex;
-    
-
+    flex-wrap: wrap;
+    padding: 10px;
     flex:1;
     flex-direction: column;
 `
@@ -32,14 +32,20 @@ const Wrapper2=styled.div`
     display: flex;
     flex:1;
     flex-direction: column;
+    justify-content: center;
     padding: 40px;
     margin-bottom: 90px;
-    
+    border: 2px solid gray;
 `
 const Chat=styled.button`
     padding:10px;
     width: 90px;
     margin: 20px 10px;
+    border: none;
+    background-color: teal;
+    color: white;
+   
+    cursor: pointer;
     
 `
 
@@ -47,15 +53,22 @@ const Price = styled.div`
     font-size: xx-large;
     font-style: 'Poppins';
     font-weight: 400;
+    text-align: center;
 `
 
 const Image=styled.img`
     height: 50%;
     width: 50%;
     
+    border: 1px solid black;
+    
 `
 const Title=styled.h1`
-    
+    width: fit-content;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: #a79e9e;
 `
 const Info1=styled.div`
     

@@ -10,7 +10,7 @@ const App =() => {
   return (
     <div className='Appy'>      
       {/* <Home />       */}
-      <Login />
+      <Product />
     </div>
     
     );
