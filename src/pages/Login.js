@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+
 
 const Container = styled.div`
     width: 100vw;
@@ -19,10 +21,17 @@ const Wrapper = styled.div`
     align-items: center;
 `
 
-const Title = styled.h1`
-    font-size: 40;
+const Title = styled.button`
+    font-size: 20px;
+    width: 50%;
     font-weight: 600;
     text-align: center;
+    color:white;
+    background-color: #0078d4;
+    padding: 15px 20px;  
+    border-radius:10px;
+    border: none;
+    cursor: pointer;
 `
 
 const Form = styled.form`
@@ -61,16 +70,10 @@ const Login = () => {
     <Container>
         <Wrapper>
             <Icon>
-                <i class="fa-solid fa-handshake"></i>  
+                <Link to="/"><i class="fa-solid fa-handshake"></i></Link>  
             </Icon>
              
-            <Title>Login PAGE</Title>
-                <Form>
-                    <Input placeholder="Outlook-Email-ID"/>
-                    <Input placeholder="Password"/>
-                    <Button>LOGIN</Button>                    
-                </Form>
-            
+            <Title>Sign In With Outlook</Title>            
         </Wrapper>
     </Container>
   )

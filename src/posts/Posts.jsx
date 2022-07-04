@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Slider from '../pages/components/Slider.jsx'
 import { popular } from './data.js'
 import Post from './Post'
 
@@ -21,6 +22,7 @@ const Posts = () => {
     <>
     <Heading>Fresh Recomendations</Heading>
     <Container>
+        
         {popular.map(item =>(
             <Post item={item} key={item.id}/> 
         ))}

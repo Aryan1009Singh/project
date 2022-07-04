@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import Slider from './components/Slider';
 
 const Container=styled.div`
     display: flex;
@@ -35,6 +36,7 @@ const Wrapper2=styled.div`
     justify-content: center;
     padding: 40px;
     margin-bottom: 90px;
+    border-radius: 10px;
     border: 2px solid gray;
 `
 const Chat=styled.button`
@@ -44,7 +46,7 @@ const Chat=styled.button`
     border: none;
     background-color: teal;
     color: white;
-   
+    border-radius: 10px;
     cursor: pointer;
     
 `
@@ -59,7 +61,7 @@ const Price = styled.div`
 const Image=styled.img`
     height: 50%;
     width: 50%;
-    
+    border-radius: 10px;
     border: 1px solid black;
     
 `
@@ -82,7 +84,9 @@ const Product = () => {
   return (
     <>
         <Navbar />
+        <Slider/>
         <Container>
+
             <Wrapper1>
                 <Image src="https://guesseu.scene7.com/is/image/GuessEU/FLGLO4FAL12-BEIBR?wid=700&amp;fmt=jpeg&amp;qlt=80&amp;op_sharpen=0&amp;op_usm=1.0,1.0,5,0&amp;iccEmbed=0" />
                 <Info1>

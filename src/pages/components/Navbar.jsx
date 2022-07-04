@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import './navbar.css'
+import { Link } from 'react-router-dom'
+
 const Container = styled.div`
     width: 100vw;
     height: 65px;;
@@ -43,6 +45,8 @@ const Right = styled.div`
     cursor: pointer;
     gap: 20px;
 `
+
+
 const Rright = styled.div`
     display: flex;
     font-size: 50px ;
@@ -96,7 +100,7 @@ export default function Navbar() {
         <Container>
             <Wrapper>
                 <Left>
-                    <i class="fa-solid fa-handshake"></i>                
+                    <Link to="/"><i class="fa-solid fa-handshake"></i></Link>                
                 </Left>
                 <Center>
                     <SearchContainer>                        
@@ -120,7 +124,9 @@ export default function Navbar() {
                     <i class="fa-brands fa-sellcast"></i>
                     
                 </Right>
+            
                 <Rright>
+                    
                     <i class="fa-solid fa-user"></i>
                 </Rright>
             </Wrapper>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import './post.css'
 const Container= styled.div`   
@@ -26,7 +27,7 @@ const Price= styled.div`
 
 const Post = ({item}) => {
   return (
-    <Container>
+    <Link to="/product/:id"><Container>
         <img src={item.imageUrl} className='work' alt='' />
             <Info>
                 {item.name}
@@ -36,7 +37,7 @@ const Post = ({item}) => {
             </Price>
         
 
-    </Container>
+    </Container></Link>
   )
 }
 
