@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import Slider from "./components/Slider";
-
+import { Link } from "react-router-dom";
 import Posts from "../posts/Posts";
 import styled from "styled-components";
 import Footer from "./components/Footer";
