@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const Container = styled.div`
     width: 100vw;
-    height: 65px;;
+    height: 85px;;
     background-color: #80e1ca;
     gap: 100px;
     
@@ -98,6 +98,7 @@ const Options =styled.option`
 
 const Navbar = () => {
     return (
+<<<<<<< HEAD
         <div className="navBar">
             <Container>
                 <Wrapper>
@@ -124,17 +125,51 @@ const Navbar = () => {
                     </Center>
                     <Right>
                         <i class="fa-brands fa-sellcast"></i>
+=======
+        <Container>
+            <Wrapper>
+                <Left>
+                    <Link to="/"><i class="fa-solid fa-handshake"></i></Link>                
+                </Left>
+                <Center>
+                    <SearchContainer>                        
+                        <Input />
+                        <i className="top fa-solid fa-magnifying-glass"></i>
+                    </SearchContainer>
+                    <But>
+                        <Options disabled selected>
+                            Categories
+                        </Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                        <Options>Link1</Options>
+                    </But>
+                </Center>
+                <Right>
+                    <Link to="/seller"><i class="fa-brands fa-sellcast"></i></Link>
+>>>>>>> d7c02812031cf216346a626c5110491827592e99
                     
                     </Right>
             
                      <Rright>
                     
+<<<<<<< HEAD
                         <i class="fa-solid fa-user"></i>
                     </Rright>
                 </Wrapper>
             </Container>
         </div>
         
+=======
+                    <Link to="/personal"><i class="fa-solid fa-user"></i></Link>
+                </Rright>
+            </Wrapper>
+        </Container>
+>>>>>>> d7c02812031cf216346a626c5110491827592e99
     )
 }
 

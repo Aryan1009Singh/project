@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Slider from './components/Slider';
 
+
 const Container=styled.div`
     display: flex;
     flex-direction: row;
