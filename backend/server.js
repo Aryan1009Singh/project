@@ -1,4 +1,4 @@
-import User from './schemas/user.js';
+import Users from './schemas/user.js';
 import Items from './schemas/item.js';
 import mongoose from 'mongoose';
 import express from 'express';
@@ -83,12 +83,46 @@ app.get('/auth/microsoft',
     (req, res) => {
         //The request will be redirected to microsoft, so this
         //function will not be called.
+        
     });
 
 app.get('/auth/microsoft/callback',
     passport.authenticate('microsoft', { failureRedirect: frontend_url + '/'}),
-    (req, res) => {
+    async (req, res) => {
         console.log(req.user);
+        
+        const user = {
+            name: req.user._json.displayName,
+            roll: req.user._json.surname,
+            email: req.user._json.mail,
+        };
+
+        console.log(user);
+
+        await Users.where("roll").equals(user.roll).exec((err, data) => {
+            if (err){
+                res.status(500).send(err);
+            }
+            else{
+                if(data.length > 0){    
+                    console.log(data);
+                }
+                else{
+                    Users.create(user, (err, data) => {
+                        if (err){
+                            console.log(err);
+                            res.status(500).send(err);
+                        }
+                        else{
+                            res.status(201).send(data);
+                        }
+                    });
+
+                }
+            }
+        });
+    
+        
         res.redirect(frontend_url + '/');
     });
 
