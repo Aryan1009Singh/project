@@ -66,6 +66,11 @@ const Icon = styled.div`
 `
 
 const Login = () => {
+
+    const microsoft = () =>{
+        window.open("http:localhost:5000/auth/microsoft", "_self")
+    };
+
   return (
     <Container>
         <Wrapper>
@@ -73,7 +78,7 @@ const Login = () => {
                 <Link to="/"><i class="fa-solid fa-handshake"></i></Link>  
             </Icon>
              
-            <Title>Sign In With Outlook</Title>            
+            <Title onClick={microsoft}>Sign In With Outlook</Title>            
         </Wrapper>
     </Container>
   )
