@@ -95,41 +95,53 @@ const Options =styled.option`
 `
 
 
-export default function Navbar() {
+const Navbar = () => {
     return (
-        <Container>
-            <Wrapper>
-                <Left>
-                    <Link to="/"><i class="fa-solid fa-handshake"></i></Link>                
-                </Left>
-                <Center>
-                    <SearchContainer>                        
-                        <Input />
-                        <i className="top fa-solid fa-magnifying-glass"></i>
-                    </SearchContainer>
-                    <But>
-                        <Options disabled selected>
-                            Categories
-                        </Options>
-                        <Options>Link1</Options>
-                        <Options>Link1</Options>
-                        <Options>Link1</Options>
-                        <Options>Link1</Options>
-                        <Options>Link1</Options>
-                        <Options>Link1</Options>
-                        <Options>Link1</Options>
-                    </But>
-                </Center>
-                <Right>
-                    <i class="fa-brands fa-sellcast"></i>
+        <div className="navBar">
+            <Container>
+                <Wrapper>
+                    <Left>
+                        <Link to="/"><i class="fa-solid fa-handshake"></i></Link>                
+                    </Left>
+                    <Center>
+                        <SearchContainer>                        
+                            <Input />
+                            <i className="top fa-solid fa-magnifying-glass"></i>
+                        </SearchContainer>
+                        <But>
+                            <Options disabled selected>
+                                Categories
+                            </Options>
+                            <Options>Link1</Options>
+                            <Options>Link1</Options>
+                            <Options>Link1</Options>
+                            <Options>Link1</Options>
+                            <Options>Link1</Options>
+                            <Options>Link1</Options>
+                            <Options>Link1</Options>
+                        </But>
+                    </Center>
+                    <Right>
+                        <i class="fa-brands fa-sellcast"></i>
                     
-                </Right>
+                    </Right>
             
-                <Rright>
+                     <Rright>
                     
-                    <i class="fa-solid fa-user"></i>
-                </Rright>
-            </Wrapper>
-        </Container>
+                        <i class="fa-solid fa-user"></i>
+                    </Rright>
+                </Wrapper>
+            </Container>
+        </div>
+        
     )
 }
+
+export default Navbar;
+
+@media only screen and (max-width: 600px) {
+    .navBar{width: 100%;}
+  }
+
+
+ 
