@@ -29,8 +29,7 @@ const Personal = () =>{
         <>
         <Navbar />
         <Slider />
-        <Container>
-            
+        <Container>           
             
             <Name>Name of the Person</Name>
 
@@ -38,7 +37,7 @@ const Personal = () =>{
 
             <Roll>roll number</Roll>
 
-            
+
 
 
 
