@@ -13,6 +13,7 @@ const Container= styled.div`
     
 ` 
 
+
 const Info=styled.div`
     align-items: right;
     justify-content: center;
@@ -27,7 +28,7 @@ const Price= styled.div`
 
 const Post = ({item}) => {
   return (
-    <Link to="/product/:id"><Container>
+    <Link to={"/product/:" + item.id}><Container>
         <img src={item.imageUrl} className='work' alt='' />
             <Info>
                 {item.name}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Container = styled.div`
     width: 100vw;
-    height: 65px;;
+    height: 85px;;
     background-color: #80e1ca;
     gap: 100px;
     
@@ -121,13 +121,13 @@ export default function Navbar() {
                     </But>
                 </Center>
                 <Right>
-                    <i class="fa-brands fa-sellcast"></i>
+                    <Link to="/seller"><i class="fa-brands fa-sellcast"></i></Link>
                     
                 </Right>
             
                 <Rright>
                     
-                    <i class="fa-solid fa-user"></i>
+                    <Link to="/personal"><i class="fa-solid fa-user"></i></Link>
                 </Rright>
             </Wrapper>
         </Container>

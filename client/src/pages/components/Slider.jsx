@@ -18,7 +18,7 @@ const Container =styled.div`
 const Slider = () => {
   return (
     <Container>
-        <Link to="/seller"><i class="fa-solid fa-arrow-up-left-from-circle">CHAT</i></Link>
+        <Link to="/chat"><i class="fa-solid fa-arrow-up-left-from-circle">CHAT</i></Link>
         <Link to="/login"><i class="fa-solid fa-arrow-up-left-from-circle">Logout</i></Link>
     </Container>
   )

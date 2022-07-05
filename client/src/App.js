@@ -9,6 +9,9 @@ import Navbar from './pages/components/Navbar';
 import Slider from './pages/components/Slider';
 import { BrowserRouter, Route, Routes, Link, Navigate} from 'react-router-dom';
 import Post from './posts/Post';
+import Personal from './Personal';
+import Chat from './Chat';
+import Seller from './Seller';
 
 const App =() => {
   const user = true;
@@ -20,6 +23,9 @@ const App =() => {
             path="/login"
             element= {<Login />}
         />
+        <Route path="/personal" element = {<Personal />} />
+        <Route path="/chat" element = {<Chat />} />
+        <Route path="/seller" element = {<Seller />} />
         
         <Route path="/Product/:id" element ={user? <Product /> : <Navigate to = "/login" />} />
       </Routes>
