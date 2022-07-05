@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const itemSchema = mongoose.Schema({
     name: String,
     roll: Number,
-    category: String,
+    price: Number,
     description: String
 });
 

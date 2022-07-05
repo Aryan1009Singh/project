@@ -76,6 +76,11 @@ app.get('/login', (req, res) => {
     res.send( '<a href = "/auth/microsoft"> Login </a>');
 });
 
+app.get('/user/get', (req, res) => {
+    console.log(req.user);
+    res.send(req.user.displayName);
+});
+
 app.get('/auth/microsoft',
     passport.authenticate('microsoft', {
 
@@ -126,6 +131,7 @@ app.get('/auth/microsoft/callback',
             res.status(500).send(er);
         }
         else{
+            res.cookie('user', to_String(user));
             res.redirect(frontend_url + '/');
         }
     });
@@ -134,8 +140,6 @@ app.get('/checkLoggedIn', (req, res) => {
     if (req.isAuthenticated()) { res.redirect(frontend_url + '/?token=' + req.query.token) }
     else { res.redirect(frontend_url + '/login'); }
 });
-
-
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
@@ -173,8 +177,19 @@ app.post('/users/register', (req, res) => {
     });
 });
 
+app.post('/item/new', (req, res) => {
+    const item = req.body;
+
+    Items.create(item, (err, data) => {
+        if (err){
+            res.status(500).send(err);
+        }
+        else{
+            res.status(201).send(data);
+        }
+    });
+});
+
 app.listen(5000, () => {
     console.log('Listening on localhost:5000');
 });
-
-

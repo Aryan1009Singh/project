@@ -42,15 +42,15 @@ const Seller = () =>{
             
             
             <Name>
-                <form method='POST' action=''>
+                <form method='POST' action='http://localhost:5000/item/new'>
                     <ul>
-                        <li><Input placeholder='Enter the Name of the Product'></Input></li>    
-                        <li><Input placeholder='Enter the Price of the Product'></Input></li>    
-                        <li><Input2 placeholder='Enter the Description of the Product'></Input2></li>    
+                        <li><Input placeholder='Enter the Name of the Product' name='name'></Input></li>
+                        <li><Input placeholder='Enter the Price of the Product' name='price'></Input></li>
+                        <li><Input2 placeholder='Enter the Description of the Product' name='description'></Input2></li>
+                        {/* <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>    
                         <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>    
                         <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>    
-                        <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>    
-                        <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>                      
+                        <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>                       */}
                            
                     </ul>    
                 </form>
