@@ -6,17 +6,19 @@ const Container =styled.div`
     width: 100%;
     height: 2vh;
     display: flex;
+    font-size: large;
+    margin: 30px 0px;
     color: black;
-    justify-content: right;
+    justify-content: space-evenly;
     padding: 10px 0;  
-    cursor: pointer; 
-    
+        
 `
 
 
 const Slider = () => {
   return (
     <Container>
+        <Link to="/seller"><i class="fa-solid fa-arrow-up-left-from-circle">CHAT</i></Link>
         <Link to="/login"><i class="fa-solid fa-arrow-up-left-from-circle">Logout</i></Link>
     </Container>
   )
