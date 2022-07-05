@@ -68,7 +68,7 @@ const Icon = styled.div`
 const Login = () => {
 
     const microsoft = () =>{
-        window.open("http:localhost:5000/auth/microsoft", "_self")
+        window.open("http://localhost:5000/auth/microsoft", "_self")
     };
 
   return (

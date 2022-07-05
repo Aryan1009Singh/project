@@ -7,4 +7,4 @@ const userSchema = mongoose.Schema({
     contact: Number
 });
 
-modules.export = mongoose=;
+modules.export = mongoose;

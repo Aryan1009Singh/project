@@ -1,3 +1,8 @@
+const User = require("./schemas/user");
+const Items = require("./schemas/item");
+const mongoose = require("mongoose");
+
+
 const express = require('express')
     , passport = require('passport')
     , MicrosoftStrategy = require('passport-microsoft').Strategy
@@ -7,6 +12,20 @@ const client_id = '2059b3a0-07e1-4d02-ae6a-72d5691d4181';
 const client_secret = 'zyj8Q~GUe1DlWoISRhh7tWaLYrLdOSBVqQsG9a7x';
 const frontend_url = 'http://localhost:3000';
 
+const connection_url = 'mongodb+srv://admin:jbzam6YUZO74PjlZ@cluster0.7u9no.mongodb.net/campusOLX?retryWrites=true&w=majority';
+
+mongoose.connect(connection_url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+
+db.once("open", () => {
+    console.log("DB connected");
+});
+
+
 //Passport setup
 
 console.log("Server running");
@@ -14,6 +33,7 @@ console.log("Server running");
 //Serialize and Deserialize
 passport.serializeUser(function (user, done){
     done(null, user);
+
 });
 
 passport.deserializeUser(function (obj, done){
@@ -77,11 +97,46 @@ app.get('/checkLoggedIn', (req, res) => {
     else { res.redirect(frontend_url + '/login'); }
 });
 
-app.listen(5000, () => {
-    console.log('Listening on localhost:5000');
-});
+
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
     res.redirect('/login');
 };
+//api routes
+app.get('/users/fetch', (req, res) => {
+    Users.findOne({roll: req.query.roll}, (err, data) => {
+        if (err){
+            res.status(500).send(err);
+        }
+        else{
+            res.status(200).send(data);
+        }
+    });
+});
+
+app.post('/users/register', (req, res) => {
+    const user = {
+        name: req.query.name,
+        roll: req.query.roll,
+        email: req.query.email,
+        contact: req.query.contact
+    };
+    console.log(user);
+
+    Users.create(user, (err, data) => {
+        if (err){
+            console.log(err);
+            res.status(500).send(err);
+        }
+        else{
+            res.status(201).send(data);
+        }
+    });
+});
+
+app.listen(5000, () => {
+    console.log('Listening on localhost:5000');
+});
+
+
