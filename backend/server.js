@@ -99,9 +99,12 @@ app.get('/auth/microsoft/callback',
 
         console.log(user);
 
+        bool error = false;
+        var er;
         await Users.where("roll").equals(user.roll).exec((err, data) => {
             if (err){
-                res.status(500).send(err);
+                error = true;
+                er = err;
             }
             else{
                 if(data.length > 0){    
@@ -110,11 +113,8 @@ app.get('/auth/microsoft/callback',
                 else{
                     Users.create(user, (err, data) => {
                         if (err){
-                            console.log(err);
-                            res.status(500).send(err);
-                        }
-                        else{
-                            res.status(201).send(data);
+                            error = true;
+                            er = err;
                         }
                     });
 
@@ -122,8 +122,12 @@ app.get('/auth/microsoft/callback',
             }
         });
     
-        
-        res.redirect(frontend_url + '/');
+        if (error){
+            res.status(500).send(er);
+        }
+        else{
+            res.redirect(frontend_url + '/');
+        }
     });
 
 app.get('/checkLoggedIn', (req, res) => {
