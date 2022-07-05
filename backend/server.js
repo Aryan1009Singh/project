@@ -1,5 +1,5 @@
-import User from './schemas/user';
-import Items from './schemas/item';
+import User from './schemas/user.js';
+import Items from './schemas/item.js';
 import mongoose from 'mongoose';
 import express from 'express';
 import passport from 'passport';
