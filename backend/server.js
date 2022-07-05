@@ -99,7 +99,7 @@ app.get('/auth/microsoft/callback',
 
         console.log(user);
 
-        bool error = false;
+        var error = false;
         var er;
         await Users.where("roll").equals(user.roll).exec((err, data) => {
             if (err){
