@@ -1,12 +1,12 @@
-const User = require("./schemas/user");
-const Items = require("./schemas/item");
-const mongoose = require("mongoose");
+import User from './schemas/user';
+import Items from './schemas/item';
+import mongoose from 'mongoose';
+import express from 'express';
+import passport from 'passport';
+import pm from 'passport-microsoft';
+import session from 'express-session';
 
-
-const express = require('express')
-    , passport = require('passport')
-    , MicrosoftStrategy = require('passport-microsoft').Strategy
-    , session = require('express-session');
+const MicrosoftStrategy = pm.Strategy;
 
 const client_id = '2059b3a0-07e1-4d02-ae6a-72d5691d4181';
 const client_secret = 'zyj8Q~GUe1DlWoISRhh7tWaLYrLdOSBVqQsG9a7x';
