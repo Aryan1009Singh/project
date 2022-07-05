@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Posts from "../posts/Posts";
 import styled from "styled-components";
 import Footer from "./components/Footer";
+
 const Bu=styled.button`
   width: 150px;
     border-radius: 10px;

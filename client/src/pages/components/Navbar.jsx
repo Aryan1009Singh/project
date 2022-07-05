@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import './navbar.css'
 import { Link } from 'react-router-dom'
 
+
 const Container = styled.div`
     width: 100vw;
     height: 65px;;
@@ -139,9 +140,11 @@ const Navbar = () => {
 
 export default Navbar;
 
+
+/*
 @media only screen and (max-width: 600px) {
     .navBar{width: 100%;}
   }
-
+*/
 
  

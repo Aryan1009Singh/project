@@ -10,6 +10,7 @@ import Slider from './pages/components/Slider';
 import { BrowserRouter, Route, Routes, Link, Navigate} from 'react-router-dom';
 import Post from './posts/Post';
 
+
 const App =() => {
   const user = true;
   return (
