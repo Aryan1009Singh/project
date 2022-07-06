@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Footer from './pages/components/Footer'
 import Navbar from './pages/components/Navbar'
 import Slider from './pages/components/Slider'
+import UserStore from './store/UserStore'
 
 const Name= styled.h1`
     display: flex;
@@ -42,7 +43,7 @@ const Seller = () =>{
             
             
             <Name>
-                <form method='POST' action='http://localhost:5000/item/new'>
+                <form method='POST' action={'http://localhost:5000/item/new?token=' + UserStore.token}>
                     <ul>
                         <li><Input placeholder='Enter the Name of the Product' name='name'></Input></li>
                         <li><Input placeholder='Enter the Price of the Product' name='price'></Input></li>

@@ -7,6 +7,7 @@ import Slider from './pages/components/Slider'
 import { popular } from './posts/data.js'
 import Post from './posts/Post'
 import axios from 'axios';
+import UserStore from './store/UserStore';
 
 const Name= styled.h1`
     
@@ -25,11 +26,14 @@ const Container =styled.div`
 `
 
 const Personal = () =>{
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState({name: 'loading..', mail: 'loading..', roll: 'loading..'});
     useEffect(() => {
-        setUser(axios.get('http://localhost:5000/user/get'));
+        if (UserStore.isLoggedIn){
+            axios.get('http://localhost:5000/user/get?token=' + UserStore.token).then((res) => {
+                setUser(res.data);
+            });
+        }
     }, []);
-
     return (
         <>
         <Navbar />
@@ -37,11 +41,11 @@ const Personal = () =>{
         <Container>
             
             
-            <Name>{user}</Name>
+            <Name>{user.name}</Name>
 
-            <Email>Email of the person</Email>
+            <Email>{user.mail}</Email>
 
-            <Roll>roll number</Roll>
+            <Roll>{user.roll}</Roll>
 
             
 
@@ -57,7 +61,7 @@ const Personal = () =>{
         
         
 
-    )
-}
+    );
+};
 
 export default Personal;

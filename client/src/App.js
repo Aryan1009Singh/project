@@ -12,22 +12,23 @@ import Post from './posts/Post';
 import Personal from './Personal';
 import Chat from './Chat';
 import Seller from './Seller';
+import { useEffect, useState } from 'react';
+import UserStore from './store/UserStore';
 
 const App =() => {
-  const user = true;
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element = {<Home /> } />
+        <Route path="/" element = {UserStore.isLoggedIn? <Home /> : <Navigate to = "/login" />} />
         <Route 
             path="/login"
-            element= {<Login />}
+            element= {!UserStore.isLoggedIn? <Login /> : <Navigate to = "/" />}
         />
-        <Route path="/personal" element = {<Personal />} />
-        <Route path="/chat" element = {<Chat />} />
-        <Route path="/seller" element = {<Seller />} />
+        <Route path="/personal" element = {UserStore.isLoggedIn? <Personal /> : <Navigate to = "/login" />} />
+        <Route path="/chat" element = {UserStore.isLoggedIn? <Chat /> : <Navigate to = "/login" />} />
+        <Route path="/seller" element = {UserStore.isLoggedIn? <Seller /> : <Navigate to = "/login" />} />
         
-        <Route path="/Product/:id" element ={user? <Product /> : <Navigate to = "/login" />} />
+        <Route path="/Product/:id" element ={UserStore.isLoggedIn? <Product /> : <Navigate to = "/login" />} />
       </Routes>
     </BrowserRouter>
     

@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import UserStore from '../store/UserStore'
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -66,16 +69,32 @@ const Icon = styled.div`
 `
 
 const Login = () => {
+    const search = useLocation().search;
+
+    useEffect(() => {
+        const token = new URLSearchParams(search).get('token');
+        if (token && !UserStore.isLoggedIn){
+            UserStore.loading = true;
+            UserStore.token = token;
+            axios.get('http://localhost:5000/user/get?token=' + token).then((res) => {
+                if (!res.data['error']){
+                    UserStore.isLoggedIn = true;
+                    console.log('logged in');
+                }
+                UserStore.loading = false;
+            });
+        }
+    }, []);
 
     const microsoft = () =>{
-        window.open("http://localhost:5000/auth/microsoft", "_self")
+        window.open("http://localhost:5000/auth/microsoft", "_self");
     };
 
   return (
     <Container>
         <Wrapper>
             <Icon>
-                <Link to="/"><i class="fa-solid fa-handshake"></i></Link>  
+                <i class="fa-solid fa-handshake"></i>
             </Icon>
              
             <Title onClick={microsoft}>Sign In With Outlook</Title>            

@@ -1,10 +1,13 @@
 import Users from './schemas/user.js';
 import Items from './schemas/item.js';
+import LoginSessions from './schemas/loginSession.js';
 import mongoose from 'mongoose';
 import express from 'express';
 import passport from 'passport';
 import pm from 'passport-microsoft';
 import session from 'express-session';
+import cors from 'cors';
+import axios from 'axios';
 
 const MicrosoftStrategy = pm.Strategy;
 
@@ -66,21 +69,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
-app.get('/', ensureAuthenticated, (req, res) => {
-    console.log(req.user._raw);
-    res.send ('<div> Home! ' + req.user.displayName + '</div>');
-});
-
-app.get('/login', (req, res) => {
-    res.send( '<a href = "/auth/microsoft"> Login </a>');
-});
-
-app.get('/user/get', (req, res) => {
-    console.log(req.user);
-    res.send(req.user.displayName);
-});
-
+//api routes
 app.get('/auth/microsoft',
     passport.authenticate('microsoft', {
 
@@ -93,8 +84,7 @@ app.get('/auth/microsoft',
 
 app.get('/auth/microsoft/callback',
     passport.authenticate('microsoft', { failureRedirect: frontend_url + '/'}),
-    async (req, res) => {
-        console.log(req.user);
+    (req, res) => {
         
         const user = {
             name: req.user._json.displayName,
@@ -102,18 +92,16 @@ app.get('/auth/microsoft/callback',
             email: req.user._json.mail,
         };
 
-        console.log(user);
-
         var error = false;
         var er;
-        await Users.where("roll").equals(user.roll).exec((err, data) => {
+        Users.where("roll").equals(user.roll).exec((err, data) => {
             if (err){
                 error = true;
                 er = err;
             }
             else{
-                if(data.length > 0){    
-                    console.log(data);
+                if(data.length > 0){
+                    // console.log(data);
                 }
                 else{
                     Users.create(user, (err, data) => {
@@ -127,69 +115,103 @@ app.get('/auth/microsoft/callback',
             }
         });
     
-        if (error){
-            res.status(500).send(er);
-        }
-        else{
-            res.cookie('user', to_String(user));
-            res.redirect(frontend_url + '/');
+        var token;
+        if (!error){
+            token = genToken();
+            fetchUser(token).then((usr) => {
+                if (!usr.error){
+                    console.log(usr.error);
+                    token = genToken();
+                }
+
+                LoginSessions.create({token: token, roll: user.roll}, (err, data) => {
+                    if (err){
+                        error = true;
+                        er = err;
+                    }
+                });
+
+                if (error){
+                    res.status(500).send(er);
+                }
+                else{
+                    res.redirect(frontend_url + '/login' + "?token=" + token);
+                }
+            });
         }
     });
 
-app.get('/checkLoggedIn', (req, res) => {
-    if (req.isAuthenticated()) { res.redirect(frontend_url + '/?token=' + req.query.token) }
-    else { res.redirect(frontend_url + '/login'); }
-});
-
-function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
-    res.redirect('/login');
-};
-//api routes
-app.get('/users/fetch', (req, res) => {
-    Users.findOne({roll: req.query.roll}, (err, data) => {
-        if (err){
-            res.status(500).send(err);
-        }
-        else{
-            res.status(200).send(data);
-        }
-    });
-});
-
-app.post('/users/register', (req, res) => {
-    const user = {
-        name: req.query.name,
-        roll: req.query.roll,
-        email: req.query.email,
-        contact: req.query.contact
-    };
-    console.log(user);
-
-    Users.create(user, (err, data) => {
-        if (err){
-            console.log(err);
-            res.status(500).send(err);
-        }
-        else{
-            res.status(201).send(data);
-        }
-    });
+app.get('/user/get', (req, res) => {
+    const token = req.query.token;
+    console.log(token);
+    if (token){
+        fetchUser(token).then((user) => {
+            res.status(201).send(user);
+        });
+    }
+    else{
+        res.status(500).send({error: "No token"});
+    }
 });
 
 app.post('/item/new', (req, res) => {
     const item = req.body;
-
-    Items.create(item, (err, data) => {
-        if (err){
-            res.status(500).send(err);
+    fetchUser(req.query.token).then((user) => {
+        if (!user.error){
+            item.roll = user.roll;
+            Items.create(item, (err, data) => {
+                if (err){
+                    res.status(500).send(err);
+                }
+                else{
+                    res.status(201).send(data);
+                }
+            });
         }
         else{
-            res.status(201).send(data);
+            res.status(500).send(user);
         }
     });
+    
 });
 
 app.listen(5000, () => {
     console.log('Listening on localhost:5000');
 });
+
+const fetchUser = (token) => {
+    var ret;
+    LoginSessions.where('token').equals(token).exec((err, data) => {
+        console.log(token);
+        if (err || data.length == 0){
+            ret = {error: true};
+        }
+        else{
+            Users.where('roll').equals(data[0].roll).exec((err, data) => {
+                if (err || data.length == 0){
+                    ret = {error: true};
+                }
+                else{
+                    ret = data[0];
+                }
+            });
+        }
+    });
+
+    return new Promise((resolve,reject)=>{
+        setTimeout(function(){
+            resolve(ret);
+        },500);
+      });
+};
+
+const chars = "abcdefghijklmnopqrstuvwxyz0123456789~ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const l = chars.length;
+const genToken = function(){
+    var tok = "";
+    for (let i = 0; i <= 36; i++){
+        let w = Math.floor(Math.random() * l);
+        tok += chars[w];
+    }
+    return tok;
+};
