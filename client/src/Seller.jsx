@@ -49,6 +49,7 @@ const Seller = () =>{
             url: 'http://localhost:5000/item/new?token=' + cookies['token'] + '&name=' + name + '&price=' + price + '&description=' + description
         }).then((res) => {
             console.log(res);
+            window.location.replace("/");
         });
     };
 

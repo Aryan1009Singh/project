@@ -41,16 +41,13 @@ const Personal = () =>{
         <>
         <Navbar />
         <Slider />
-        <Container>
-            
+        <Container>           
             
             <Name>{user.name}</Name>
 
             <Email>{user.email}</Email>
 
-            <Roll>{user.roll}</Roll>
-
-            
+            <Roll>{user.roll}</Roll>        
 
 
 
