@@ -8,7 +8,9 @@ import pm from 'passport-microsoft';
 import session from 'express-session';
 import cors from 'cors';
 import axios from 'axios';
+import bodyParser from 'body-parser';
 
+const jsonParser = bodyParser.json();
 const MicrosoftStrategy = pm.Strategy;
 
 const client_id = '2059b3a0-07e1-4d02-ae6a-72d5691d4181';
@@ -70,6 +72,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
+app.use(jsonParser);
 
 //api routes
 app.get('/auth/microsoft',
@@ -154,6 +157,29 @@ app.get('/user/get', (req, res) => {
     }
 });
 
+app.get('/item/all', (req, res) => {
+    Items.find((err, data) => {
+        if (err){
+            res.status(500).send(err);
+        }
+        else{
+            res.status(201).send(data);
+        }
+    });
+});
+
+app.get('/item/personal', (req, res) => {
+    const roll = req.query.roll;
+    Items.where('roll').equals(roll).exec((err, data) => {
+        if (err){
+            res.status(500).send(err);
+        }
+        else{
+            res.status(201).send(data);
+        }
+    });
+});
+
 app.get('/user/logout', (req, res) => {
     const token = req.query.token;
     if (token){
@@ -166,9 +192,9 @@ app.get('/user/logout', (req, res) => {
     }
 });
 
-app.post('/item/new', (req, res) => {
+app.post('/item/new', jsonParser, (req, res) => {
     const item = req.query;
-    console.log(item);
+    item.image = req.body.image;
     fetchUser(req.query.token).then((user) => {
         if (!user.error){
             item.roll = user.roll;

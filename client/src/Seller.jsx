@@ -7,7 +7,7 @@ import Slider from './pages/components/Slider'
 import UserStore from './store/UserStore'
 import axios from 'axios';
 import { useCookies } from 'react-cookie'
-import base64 from 'file-base64'
+import FileBase64 from 'react-file-base64'
 
 const Name= styled.h1`
     display: flex;
@@ -47,15 +47,19 @@ const Seller = () =>{
     const [cookies, setCookie] = useCookies(['loggedIn', 'loading', 'token']);
     
     const clickHandler = () => {
-        base64.encode(image, function(err, base64String){
-            axios({
+        axios({
                 method: 'post',
-                url: 'http://localhost:5000/item/new?token=' + cookies['token'] + '&name=' + name + '&price=' + price + '&description=' + description + '&image=' + base64String
+                url: 'http://localhost:5000/item/new?token=' + cookies['token'] + '&name=' + name + '&price=' + price + '&description=' + description,
+                data: {
+                    image: image
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }).then((res) => {
                 console.log(res);
                 window.location.replace("/");
             });
-        });
     };
 
     const changeHandler1 = ({target}) => {
@@ -70,11 +74,6 @@ const Seller = () =>{
         setDescription(target.value);
     };
 
-    const changeHandler4 = ({target}) => {
-        console.log(target.value);
-        setImage(target.value);
-    };
-
     return (
         <>
         <Navbar />
@@ -87,7 +86,14 @@ const Seller = () =>{
                     <li><Input placeholder='Enter the Name of the Product' name='name' onChange={changeHandler1} value = {name}></Input></li>
                     <li><Input placeholder='Enter the Price of the Product' name='price' onChange={changeHandler2} value = {price}></Input></li>
                     <li><Input2 placeholder='Enter the Description of the Product' name='description' onChange={changeHandler3} value = {description}></Input2></li>
-                    <li><Input placeholder='Enter the Name of the Product' type="file" accept='image/*' onChange={changeHandler4}></Input></li>    
+                    <li><FileBase64
+                        type = "file"
+                        multiple = {false}
+                        onDone = {({base64}) => {
+                            console.log(base64);
+                            setImage(base64);
+                        }}
+                    /></li>
                     
                            
                 </ul>

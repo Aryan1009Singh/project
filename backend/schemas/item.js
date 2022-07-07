@@ -5,6 +5,7 @@ const itemSchema = mongoose.Schema({
     roll: Number,
     price: Number,
     description: String,
+    image: String
 });
 
 export default mongoose.model("items", itemSchema);

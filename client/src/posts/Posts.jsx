@@ -1,8 +1,10 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Slider from '../pages/components/Slider.jsx'
-import { popular } from './data.js'
+//import { popular } from './data.js'
 import Post from './Post'
+import { useState } from 'react'
 
 const Container = styled.div`
     padding: 20px;
@@ -18,13 +20,20 @@ const Heading= styled.p`
     
 `
 const Posts = () => {
+  const [popular, setPopular] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/item/all').then((res) => {
+      setPopular(res.data);
+    });
+  }, []);
+
   return (
     <>
     <Heading>Fresh Recomendations</Heading>
     <Container>
         
         {popular.map(item =>(
-            <Post item={item} key={item.id}/> 
+            <Post item={item} key={item._id}/> 
         ))}
     </Container>
     </>
