@@ -7,6 +7,7 @@ import Slider from './pages/components/Slider'
 import UserStore from './store/UserStore'
 import axios from 'axios';
 import { useCookies } from 'react-cookie'
+import base64 from 'file-base64'
 
 const Name= styled.h1`
     display: flex;
@@ -41,15 +42,19 @@ const Seller = () =>{
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
+
     const [cookies, setCookie] = useCookies(['loggedIn', 'loading', 'token']);
     
     const clickHandler = () => {
-        axios({
-            method: 'post',
-            url: 'http://localhost:5000/item/new?token=' + cookies['token'] + '&name=' + name + '&price=' + price + '&description=' + description
-        }).then((res) => {
-            console.log(res);
-            window.location.replace("/");
+        base64.encode(image, function(err, base64String){
+            axios({
+                method: 'post',
+                url: 'http://localhost:5000/item/new?token=' + cookies['token'] + '&name=' + name + '&price=' + price + '&description=' + description + '&image=' + base64String
+            }).then((res) => {
+                console.log(res);
+                window.location.replace("/");
+            });
         });
     };
 
@@ -65,6 +70,11 @@ const Seller = () =>{
         setDescription(target.value);
     };
 
+    const changeHandler4 = ({target}) => {
+        console.log(target.value);
+        setImage(target.value);
+    };
+
     return (
         <>
         <Navbar />
@@ -77,7 +87,7 @@ const Seller = () =>{
                     <li><Input placeholder='Enter the Name of the Product' name='name' onChange={changeHandler1} value = {name}></Input></li>
                     <li><Input placeholder='Enter the Price of the Product' name='price' onChange={changeHandler2} value = {price}></Input></li>
                     <li><Input2 placeholder='Enter the Description of the Product' name='description' onChange={changeHandler3} value = {description}></Input2></li>
-                    <li><Input placeholder='Enter the Name of the Product' type="file" accept='image/*'></Input></li>    
+                    <li><Input placeholder='Enter the Name of the Product' type="file" accept='image/*' onChange={changeHandler4}></Input></li>    
                     
                            
                 </ul>

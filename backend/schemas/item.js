@@ -4,7 +4,7 @@ const itemSchema = mongoose.Schema({
     name: String,
     roll: Number,
     price: Number,
-    description: String
+    description: String,
 });
 
 export default mongoose.model("items", itemSchema);
