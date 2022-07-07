@@ -154,6 +154,18 @@ app.get('/user/get', (req, res) => {
     }
 });
 
+app.get('/user/logout', (req, res) => {
+    const token = req.query.token;
+    if (token){
+        LoginSessions.deleteOne({token: token}).then((data) => {
+            res.status(201).send({done: true});
+        });
+    }
+    else{
+        res.status(500).send({error: "No token"});
+    }
+});
+
 app.post('/item/new', (req, res) => {
     const item = req.body;
     fetchUser(req.query.token).then((user) => {

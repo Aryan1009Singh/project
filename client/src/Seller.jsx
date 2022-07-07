@@ -53,7 +53,7 @@ const Seller = () =>{
                         <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>    
                         <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>                       */}
                            
-                    </ul>    
+                    </ul>
                 </form>
                 
             </Name>

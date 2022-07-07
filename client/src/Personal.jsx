@@ -8,6 +8,7 @@ import { popular } from './posts/data.js'
 import Post from './posts/Post'
 import axios from 'axios';
 import UserStore from './store/UserStore';
+import { useCookies } from 'react-cookie'
 
 const Name= styled.h1`
     
@@ -26,10 +27,12 @@ const Container =styled.div`
 `
 
 const Personal = () =>{
-    const [user, setUser] = useState({name: 'loading..', mail: 'loading..', roll: 'loading..'});
+    const [user, setUser] = useState({name: 'loading..', email: 'loading..', roll: 'loading..'});
+    const [cookies, setCookie] = useCookies(['loggedIn', 'token', 'loading']);
     useEffect(() => {
-        if (UserStore.isLoggedIn){
-            axios.get('http://localhost:5000/user/get?token=' + UserStore.token).then((res) => {
+        if (cookies['loggedIn']){
+            axios.get('http://localhost:5000/user/get?token=' + cookies['token']).then((res) => {
+                console.log(res.data);
                 setUser(res.data);
             });
         }
@@ -43,7 +46,7 @@ const Personal = () =>{
             
             <Name>{user.name}</Name>
 
-            <Email>{user.mail}</Email>
+            <Email>{user.email}</Email>
 
             <Roll>{user.roll}</Roll>
 

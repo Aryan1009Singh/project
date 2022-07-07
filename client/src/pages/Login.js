@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 import UserStore from '../store/UserStore'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 
 const Container = styled.div`
@@ -70,18 +71,19 @@ const Icon = styled.div`
 
 const Login = () => {
     const search = useLocation().search;
+    const [cookies, setCookie] = useCookies(['loggedIn', 'token', 'loading']);
 
     useEffect(() => {
         const token = new URLSearchParams(search).get('token');
-        if (token && !UserStore.isLoggedIn){
-            UserStore.loading = true;
-            UserStore.token = token;
+        if (token){
+            setCookie('token', token, {path: '/'});
+            setCookie('loading', 'true', {path: '/'});
             axios.get('http://localhost:5000/user/get?token=' + token).then((res) => {
                 if (!res.data['error']){
-                    UserStore.isLoggedIn = true;
-                    console.log('logged in');
+                    console.log('logged in.');
+                    setCookie('loggedIn', 'true', {path: '/'});
                 }
-                UserStore.loading = false;
+                setCookie('loading', 'false', {path: '/'});
             });
         }
     }, []);
@@ -90,17 +92,18 @@ const Login = () => {
         window.open("http://localhost:5000/auth/microsoft", "_self");
     };
 
-  return (
-    <Container>
-        <Wrapper>
-            <Icon>
-                <i class="fa-solid fa-handshake"></i>
-            </Icon>
-             
-            <Title onClick={microsoft}>Sign In With Outlook</Title>            
-        </Wrapper>
-    </Container>
-  )
+    return (
+        //cookies['loggedIn'] ? <Navigate to = "/"></Navigate> :
+        <Container>
+            <Wrapper>
+                <Icon>
+                    <i class="fa-solid fa-handshake"></i>
+                </Icon>
+                
+                <Title onClick={microsoft}>Sign In With Outlook</Title>            
+            </Wrapper>
+        </Container>
+    );
 }
 
 export default Login
