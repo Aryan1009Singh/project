@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Slider from './components/Slider';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 
 const Container=styled.div`
@@ -40,7 +42,7 @@ const Wrapper2=styled.div`
     border-radius: 10px;
     border: 2px solid gray;
 `
-const Chat=styled.button`
+const Delete=styled.button`
     padding:10px;
     width: 90px;
     margin: 20px 10px;
@@ -82,6 +84,21 @@ const Info1=styled.div`
 
 
 const Product = () => {
+    const [item, setItem] = useState({});
+    const [roll, setRoll] = useState(0);
+    const [cookies, setCookie] = useCookies(['token', 'loading', 'isLoggedIn']);
+
+    useEffect(() => {
+        //console.log(window.location.href.substring(31));
+        axios.get('http://localhost:5000/item/single?_id=' + window.location.href.substring(31)).then((res) => {
+            console.log(res.data[0]);
+            axios.get('http://localhost:5000/user/get?token=' + cookies['token']).then((res) => {
+                setRoll(res.data.roll);
+            });
+            setItem(res.data[0]);
+        });
+    }, []);
+
   return (
     <>
         <Navbar />
@@ -89,24 +106,21 @@ const Product = () => {
         <Container>
 
             <Wrapper1>
-                <Image src="https://guesseu.scene7.com/is/image/GuessEU/FLGLO4FAL12-BEIBR?wid=700&amp;fmt=jpeg&amp;qlt=80&amp;op_sharpen=0&amp;op_usm=1.0,1.0,5,0&amp;iccEmbed=0" />
+                <Image src={item.image} />
                 <Info1>
-                    <Title>Shoes</Title>
+                    <Title>{item.name}</Title>
                     <Details>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque esse consequatur saepe praesentium obcaecati, aut, ab hic iste ea repudiandae suscipit unde temporibus quisquam libero quae officia dolore veritatis rem.
+                        {item.description}
                     </Details>
-                    <Desc>
-                        This is a good product.
-                    </Desc>
                 </Info1>
             </Wrapper1>
             <Wrapper2>
                 <Price>
-                    Rupee 200
+                    Rupee {item.price}
                 </Price>
-                <Chat>
-                    Chat with Seller
-                </Chat>
+                {roll == item.roll ? <Delete>
+                    Delete
+                </Delete> : <></>}
             </Wrapper2>
         </Container>
         <Footer />

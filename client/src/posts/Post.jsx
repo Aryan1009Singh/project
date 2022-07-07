@@ -28,7 +28,7 @@ const Price= styled.div`
 
 const Post = ({item}) => {
   return (
-    <Link to={"/product/:" + item.id}><Container>
+    <Link to={"/product/:" + item._id}><Container>
         <img src={item.image} className='work' alt='' />
             <Info>
                 {item.name}

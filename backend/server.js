@@ -180,6 +180,18 @@ app.get('/item/personal', (req, res) => {
     });
 });
 
+app.get('/item/single', (req, res) => {
+    const id = req.query._id;
+    Items.where('_id').equals(id).exec((err, data) => {
+        if (err){
+            res.status(500).send(err);
+        }
+        else{
+            res.status(201).send(data);
+        }
+    });
+});
+
 app.get('/user/logout', (req, res) => {
     const token = req.query.token;
     if (token){
