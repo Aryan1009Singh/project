@@ -167,7 +167,8 @@ app.get('/user/logout', (req, res) => {
 });
 
 app.post('/item/new', (req, res) => {
-    const item = req.body;
+    const item = req.query;
+    console.log(item);
     fetchUser(req.query.token).then((user) => {
         if (!user.error){
             item.roll = user.roll;

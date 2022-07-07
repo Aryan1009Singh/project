@@ -5,6 +5,8 @@ import Footer from './pages/components/Footer'
 import Navbar from './pages/components/Navbar'
 import Slider from './pages/components/Slider'
 import UserStore from './store/UserStore'
+import axios from 'axios';
+import { useCookies } from 'react-cookie'
 
 const Name= styled.h1`
     display: flex;
@@ -39,9 +41,15 @@ const Seller = () =>{
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
+    const [cookies, setCookie] = useCookies(['loggedIn', 'loading', 'token']);
     
     const clickHandler = () => {
-
+        axios({
+            method: 'post',
+            url: 'http://localhost:5000/item/new?token=' + cookies['token'] + '&name=' + name + '&price=' + price + '&description=' + description
+        }).then((res) => {
+            console.log(res);
+        });
     };
 
     const changeHandler1 = ({target}) => {
