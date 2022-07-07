@@ -77,10 +77,8 @@ const Seller = () =>{
                     <li><Input placeholder='Enter the Name of the Product' name='name' onChange={changeHandler1} value = {name}></Input></li>
                     <li><Input placeholder='Enter the Price of the Product' name='price' onChange={changeHandler2} value = {price}></Input></li>
                     <li><Input2 placeholder='Enter the Description of the Product' name='description' onChange={changeHandler3} value = {description}></Input2></li>
-                    {/* <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>    
-                    <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>    
-                    <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li>    
-                    <li><Input placeholder='Enter the Name of the Product' type="file"></Input></li> */}
+                    <li><Input placeholder='Enter the Name of the Product' type="file" accept='image/*'></Input></li>    
+                    
                            
                 </ul>
                 <button type = "submit" name = "submit" onClick = {clickHandler}>SUBMIT</button>
