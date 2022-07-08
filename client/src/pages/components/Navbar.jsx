@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import './navbar.css'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
+import { useState } from 'react';
 
 const Container = styled.div`
     width: 100vw;
@@ -95,7 +97,20 @@ const Options =styled.option`
 `
 
 
-export default function Navbar() {
+export default function Navbar(props) {
+    const [str, setStr] = useState('');
+    const changeHandler = ({ target }) => {
+        setStr(target.value.toUpperCase());
+    };
+
+    const clickHandler = () => {
+        console.log(str);
+        axios.get('http://localhost:5000/item/filter?str=' + str).then((res) => {
+            console.log(res.data);
+            props.setPopular(res.data);
+        });
+    };
+
     return (
         <Container>
             <Wrapper>
@@ -104,8 +119,8 @@ export default function Navbar() {
                 </Left>
                 <Center>
                     <SearchContainer>                        
-                        <Input />
-                        <i className="top fa-solid fa-magnifying-glass"></i>
+                        <Input value = {str} onChange = {changeHandler}/>
+                        <i className="top fa-solid fa-magnifying-glass" onClick = {clickHandler}></i>
                     </SearchContainer>
                     <But>
                         <Options disabled selected>

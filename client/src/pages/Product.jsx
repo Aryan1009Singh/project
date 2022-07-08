@@ -104,6 +104,7 @@ const Email=styled.button`
 const Product = () => {
     const [item, setItem] = useState({});
     const [roll, setRoll] = useState(0);
+    const [mail, setMail] = useState('');
     const [cookies, setCookie] = useCookies(['token', 'loading', 'isLoggedIn']);
 
     useEffect(() => {
@@ -114,8 +115,20 @@ const Product = () => {
                 setRoll(res.data.roll);
             });
             setItem(res.data[0]);
+            axios.get('http://localhost:5000/user/email?roll=' + res.data[0].roll).then((res) => {
+                console.log(res.data);
+                setMail(res.data);
+            });
         });
     }, []);
+
+    const clickHandler = () => {
+        axios.delete('http://localhost:5000/item/delete?id=' + item._id).then((res) => {
+            console.log(res.data);
+            window.alert('Item deleted successfully.');
+            window.location.replace('/');
+        });
+    };
 
   return (
     <>
@@ -136,9 +149,9 @@ const Product = () => {
                 <Price>
                     Rupee {item.price}
                 </Price>
-                {roll == item.roll ? <Delete>
+                {roll == item.roll ? <Delete onClick = {clickHandler}>
                     Delete
-                </Delete> : <Email>
+                </Delete> : <Email onClick = {() => window.open(`mailto:${mail}`)}>
                         Click to Send Mail to the owner
                     </Email>}
             </Wrapper2>

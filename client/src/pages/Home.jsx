@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import Posts from "../posts/Posts";
 import styled from "styled-components";
 import Footer from "./components/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import UserStore from "../store/UserStore";
 import Login from "./Login";
 import axios from 'axios';
@@ -27,14 +27,20 @@ const Center=styled.div`
 `
 
 export default function Home() {
+  const [popular, setPopular] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/item/all').then((res) => {
+      setPopular(res.data);
+    });
+  }, []);
 
   return (
     <>
         
         <div className="home">
-            <Navbar />
+            <Navbar setPopular = {setPopular}/>
             <Slider />
-            <Posts />
+            <Posts popular = {popular}/>
             <Center>
               <Bu>Load More</Bu>
             </Center>

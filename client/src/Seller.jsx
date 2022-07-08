@@ -58,12 +58,13 @@ const Seller = () =>{
                 }
             }).then((res) => {
                 console.log(res);
+                window.alert('Item posted successfully.');
                 window.location.replace("/");
             });
     };
 
     const changeHandler1 = ({target}) => {
-        setName(target.value);
+        setName(target.value.toUpperCase());
     };
 
     const changeHandler2 = ({target}) => {

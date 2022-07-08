@@ -10,7 +10,9 @@ import cors from 'cors';
 import axios from 'axios';
 import bodyParser from 'body-parser';
 
-const jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json({
+    limit: '50mb'
+});
 const MicrosoftStrategy = pm.Strategy;
 
 const client_id = '2059b3a0-07e1-4d02-ae6a-72d5691d4181';
@@ -180,6 +182,18 @@ app.get('/item/personal', (req, res) => {
     });
 });
 
+app.get('/user/email', (req, res) => {
+    const roll = req.query.roll;
+    Users.where('roll').equals(roll).exec((err, data) => {
+        if (err){
+            res.status(500).send(err);
+        }
+        else{
+            res.status(201).send(data[0].email);
+        }
+    });
+});
+
 app.get('/item/single', (req, res) => {
     const id = req.query._id;
     Items.where('_id').equals(id).exec((err, data) => {
@@ -202,6 +216,13 @@ app.get('/user/logout', (req, res) => {
     else{
         res.status(500).send({error: "No token"});
     }
+});
+
+app.get('/item/filter', (req, res) => {
+    const str = req.query.str;
+    Items.find({'name' : {$regex : str}}).then((data) => {
+        res.status(201).send(data);
+    });
 });
 
 app.post('/item/new', jsonParser, (req, res) => {
@@ -255,6 +276,13 @@ const fetchUser = (token) => {
         },500);
       });
 };
+
+app.delete('/item/delete', (req, res) => {
+    const id = req.query.id;
+    Items.deleteOne({_id: id}).then((data) => {
+        res.status(201).send(data);
+    });
+});
 
 const chars = "abcdefghijklmnopqrstuvwxyz0123456789~ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const l = chars.length;

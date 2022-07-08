@@ -19,20 +19,13 @@ const Heading= styled.p`
     font-size: 50px;
     
 `
-const Posts = () => {
-  const [popular, setPopular] = useState([]);
-  useEffect(() => {
-    axios.get('http://localhost:5000/item/all').then((res) => {
-      setPopular(res.data);
-    });
-  }, []);
-
+const Posts = (props) => {
   return (
     <>
     <Heading>Fresh Recommendations</Heading>
     <Container>
         
-        {popular.map(item =>(
+        {props.popular.map(item =>(
             <Post item={item} key={item._id}/> 
         ))}
     </Container>
