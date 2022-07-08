@@ -29,7 +29,7 @@ const Posts = () => {
 
   return (
     <>
-    <Heading>Fresh Recomendations</Heading>
+    <Heading>Fresh Recommendations</Heading>
     <Container>
         
         {popular.map(item =>(

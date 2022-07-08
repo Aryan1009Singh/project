@@ -44,6 +44,7 @@ const Wrapper2=styled.div`
 `
 const Delete=styled.button`
     padding:10px;
+    display: flex;
     width: 90px;
     margin: 20px 10px;
     border: none;
@@ -76,6 +77,23 @@ const Title=styled.h1`
     background-color: #a79e9e;
 `
 const Info1=styled.div`
+    
+`
+
+const Email=styled.button`
+    
+    display: flex;
+    padding:10px;
+    
+    width: 90px;
+    margin: 20px 10px;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: teal;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
     
 `
 
@@ -120,7 +138,9 @@ const Product = () => {
                 </Price>
                 {roll == item.roll ? <Delete>
                     Delete
-                </Delete> : <></>}
+                </Delete> : <Email>
+                        Click to Send Mail to the owner
+                    </Email>}
             </Wrapper2>
         </Container>
         <Footer />
