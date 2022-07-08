@@ -11,6 +11,7 @@ const Container = styled.div`
     display: flex;
     flex:1;
     flex-wrap: wrap;
+    min-height: 400px;
        
 `
 
@@ -19,13 +20,16 @@ const Heading= styled.p`
     font-size: 50px;
     
 `
+const H1 = styled.h1`
+    
+`
+
 const Posts = (props) => {
   return (
     <>
     <Heading>Fresh Recommendations</Heading>
     <Container>
-        
-        {props.popular.map(item =>(
+        {props.popular.length == 0 ? <H1> Nothing to show..</H1> : props.popular.map(item =>(
             <Post item={item} key={item._id}/> 
         ))}
     </Container>
