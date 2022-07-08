@@ -111,15 +111,19 @@ export default function Navbar(props) {
         });
     };
 
+    const clickHandler2 = () => {
+        window.location.replace('/');
+    };
+
     return (
         <Container>
             <Wrapper>
                 <Left>
-                    <Link to="/"><i class="fa-solid fa-handshake"></i></Link>                
+                    <i class="fa-solid fa-handshake" onClick = {clickHandler2}></i>               
                 </Left>
                 <Center>
                     <SearchContainer>                        
-                        <Input value = {str} onChange = {changeHandler}/>
+                        <Input placeholder = 'Search for items' value = {str} onChange = {changeHandler}/>
                         <i className="top fa-solid fa-magnifying-glass" onClick = {clickHandler}></i>
                     </SearchContainer>
                     <But>
